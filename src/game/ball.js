@@ -9,14 +9,14 @@ export class Ball {
     }
 
     draw() {
-        console.log('desenhou')
+        this._graphics.clear();
         this._graphics.beginFill(this.color);
         this._graphics.drawCircle(this.x, this.y, this.r);
         this._graphics.endFill();
     }
 
     update() {
-
+        this.x += 2;
     }
 
 }
