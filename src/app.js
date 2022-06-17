@@ -1,5 +1,6 @@
 import { Ball } from './game/ball.js'
 import { Background } from './game/background.js';
+import { rndInt } from "./shared/util.js";
 
 // setup
 let screen_width = 1280;
@@ -10,24 +11,44 @@ let app = new PIXI.Application({ width: screen_width, height: screen_height, cle
 document.body.appendChild(app.view);
 
 let background = new Background(0, 0, screen_width, screen_height, 0x933047);
-let eball = new Ball(screen_width / 2 + 20, screen_height / 2, 10, 0x42f595);
-let eball2 = new Ball(screen_width / 2 - 20, screen_height / 2, 10, 0xFFFFFF);
-eball2.speedX = -4;
+
+app.stage.addChild(background._graphics);
+
+let balls = [];
+const ballsQuantity = 500;
+for (let i = 0; i < ballsQuantity; i++) {
+    var randomColor = '0x' + String(Math.floor(Math.random() * 16777215).toString(16));
+    let randomX = rndInt(0, screen_width);
+    let randomY = rndInt(0, screen_height);
+    let newBall = new Ball(randomX, randomY, 10, randomColor);
+    newBall.speedX = rndInt(-2, 2);
+    newBall.speedY = rndInt(-2, 2);
+    balls[i] = newBall;
+    app.stage.addChild(newBall._graphics);
+}
 
 app.ticker.add(delta => game(delta));
 
-app.stage.addChild(background._graphics, eball._graphics, eball2._graphics);
 
 function game(delta) {
     // update
-    eball.update();
-    eball2.update();
-    // collision detection <- horrible...
-    eball.detectCollision(eball2);
-    eball2.detectCollision(eball);
+    for (let i = 0; i < ballsQuantity; i++) {
+        balls[i].update();
+    }
+
+    // collision detection <- horrible... 
+    for (let i = 0; i < ballsQuantity; i++) {
+        for (let j = ballsQuantity - 1; j > -1; j--) {
+            if (i != j) {
+                balls[i].detectCollision(balls[j]);
+            }
+        }
+    }
+
     //draw
-    eball.draw();
-    eball2.draw();
+    for (let i = 0; i < ballsQuantity; i++) {
+        balls[i].draw();
+    }
 
     background.draw();
 }

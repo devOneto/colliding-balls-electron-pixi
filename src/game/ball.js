@@ -1,5 +1,3 @@
-import { getRandomItem } from "../shared/util.js";
-
 export class Ball {
 
     constructor(x, y, r, color) {
@@ -36,10 +34,10 @@ export class Ball {
         var dx = (this.x + this.r) - (ball.x + ball.r);
         var dy = (this.y + this.r) - (ball.y + ball.r);
         var distance = Math.sqrt(dx * dx + dy * dy);
-        console.log(distance);
         if (distance <= this.r) {
-            this.speedX = 0;
-            this.speedY = 0;
+            this.speedX *= -1;
+            this.speedY *= -1;
+            this.color = '0x' + String(Math.floor(Math.random() * 16777215).toString(16));
         }
     }
 

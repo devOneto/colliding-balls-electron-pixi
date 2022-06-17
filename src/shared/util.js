@@ -9,3 +9,7 @@ export function getRandomItem(arr) {
 
     return item;
 }
+
+export function rndInt(a, b) {
+    return Math.floor(Math.random() * b) + a;
+} 
