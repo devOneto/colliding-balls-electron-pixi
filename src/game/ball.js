@@ -7,8 +7,8 @@ export class Ball {
         this.y = y;
         this.r = r;
         this.color = color;
-        this.speedX = 10;
-        this.speedY = 10;
+        this.speedX = 4;
+        this.speedY = 4;
         this._graphics = new PIXI.Graphics();
     }
 
@@ -36,8 +36,10 @@ export class Ball {
         var dx = (this.x + this.r) - (ball.x + ball.r);
         var dy = (this.y + this.r) - (ball.y + ball.r);
         var distance = Math.sqrt(dx * dx + dy * dy);
+        console.log(distance);
         if (distance <= this.r) {
-            this.speedX *= -1;
+            this.speedX = 0;
+            this.speedY = 0;
         }
     }
 

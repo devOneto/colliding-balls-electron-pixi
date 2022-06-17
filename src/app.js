@@ -12,7 +12,7 @@ document.body.appendChild(app.view);
 let background = new Background(0, 0, screen_width, screen_height, 0x933047);
 let eball = new Ball(screen_width / 2 + 20, screen_height / 2, 10, 0x42f595);
 let eball2 = new Ball(screen_width / 2 - 20, screen_height / 2, 10, 0xFFFFFF);
-eball2.speedX = -10;
+eball2.speedX = -4;
 
 app.ticker.add(delta => game(delta));
 
@@ -24,6 +24,7 @@ function game(delta) {
     eball2.update();
     // collision detection <- horrible...
     eball.detectCollision(eball2);
+    eball2.detectCollision(eball);
     //draw
     eball.draw();
     eball2.draw();
