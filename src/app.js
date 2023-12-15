@@ -10,17 +10,17 @@ let app = new PIXI.Application({ width: screen_width, height: screen_height, cle
 
 document.body.appendChild(app.view);
 
-let background = new Background(0, 0, screen_width, screen_height, 0x933047);
+let background = new Background(0, 0, screen_width, screen_height, 'black');
 
 app.stage.addChild(background._graphics);
 
 let balls = [];
 const ballsQuantity = 500;
 for (let i = 0; i < ballsQuantity; i++) {
-    var randomColor = '0x' + String(Math.floor(Math.random() * 16777215).toString(16));
+    var initialColor = 'white';
     let randomX = rndInt(0, screen_width);
     let randomY = rndInt(0, screen_height);
-    let newBall = new Ball(randomX, randomY, 10, randomColor);
+    let newBall = new Ball(randomX, randomY, 10, initialColor);
     newBall.speedX = rndInt(-2, 2);
     newBall.speedY = rndInt(-2, 2);
     balls[i] = newBall;

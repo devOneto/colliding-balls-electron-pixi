@@ -1,3 +1,5 @@
+import { generateRandomColor } from './Utils.js'
+
 export class Ball {
 
     constructor(x, y, r, color) {
@@ -37,7 +39,7 @@ export class Ball {
         if (distance <= this.r) {
             this.speedX *= -1;
             this.speedY *= -1;
-            this.color = '0x' + String(Math.floor(Math.random() * 16777215).toString(16));
+            this.color = generateRandomColor();
         }
     }
 
